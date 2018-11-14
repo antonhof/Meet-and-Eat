@@ -204,6 +204,9 @@ module.exports = env => {
             new webpack.DefinePlugin({
                 "global.TNS_WEBPACK": "true",
                 "process": undefined,
+                config: JSON.stringify({
+                    apiUrl: 'http://localhost:4200'
+                })
             }),
             // Remove all files from the out dir.
             new CleanWebpackPlugin([`${dist}/**/*`]),
