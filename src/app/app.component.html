@@ -1,10 +1,9 @@
-<div class="jumbotron">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6 offset-sm-3">
-                <router-outlet></router-outlet>
-                <alert></alert>
-            </div>
+<div class="container">
+    <div class="row">
+        <div class="col-10 offset-1" [@routeAnimation]="getAnimationData(routerOutlet)">
+            <router-outlet #routerOutlet="outlet"></router-outlet>
+            <alert></alert>
+            
         </div>
     </div>
 </div>

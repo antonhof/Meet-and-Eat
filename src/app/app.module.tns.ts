@@ -6,10 +6,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { AuswahlComponent } from './auswahl/auswahl.component';
 import { ErgebnisComponent } from './ergebnis/ergebnis.component';
 import { AlertComponent } from './_directives/alert/alert.component';
 import { RegisterComponent } from './register/register.component';
+import { WorkspaceComponent } from './home/workspace/workspace.component';
 
 
 // Uncomment and add to NgModule imports if you need to use two-way binding
@@ -23,10 +23,10 @@ import { RegisterComponent } from './register/register.component';
     AppComponent,
     HomeComponent,
     LoginComponent,
-    AuswahlComponent,
     ErgebnisComponent,
     AlertComponent,
     RegisterComponent,
+    WorkspaceComponent,
   ],
   imports: [
     NativeScriptModule,

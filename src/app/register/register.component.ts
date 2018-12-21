@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { AlertService } from '../_services/alert.service';
-import { UserService } from '../_services/user.service';
+import { FirebaseUserService } from '../_services/firebase-user.service';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private userService: UserService,
+    private userService: FirebaseUserService,
     private alertService: AlertService) {}
 
   ngOnInit() {

@@ -1,0 +1,20 @@
+<h2>{{ (workspace$ | async)?.name}}</h2>
+<ul class="workspaces">
+  <li *ngFor="let restaurant of restaurants$ | async">    
+    <input #box type="checkbox" 
+    (click)="choseRestaurant(restaurant.key, restaurant.name, restaurant.score, box.checked)">
+    <span class="badge">{{restaurant.score}}</span>{{restaurant.name}}
+  </li>
+</ul>
+<form [formGroup]="rForm" (ngSubmit)="createRestaurant()">
+  <div class="form-group input-group">
+    <div class="form-group input-group-btn">
+      <button type="submit" class="btn btn-primary"> Hinzufügen</button>
+    </div>
+    <input type="text" class="form-control" formControlName="spaceName" />
+    <div *ngIf="submitted && f.spaceName.errors" class="invalid-feedback">
+      <div *ngIf="f.spaceName.errors.required">Ein Name für dein Workspace wird benötigt</div>
+    </div>
+  </div>
+</form>
+<button type="button" class="btn btn-primary" [routerLink]="['/home']">Zurück</button>
