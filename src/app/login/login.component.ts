@@ -23,15 +23,15 @@ export class LoginComponent implements OnInit {
   returnUrl: string;
   user: User;
 
-  title = "Meat and Eat";
-  loginData : any;
+  title = 'Meat and Eat';
+  loginData: any;
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router, 
+    private router: Router,
     private authenticationService: FirebaseAuthenticationService,
-    private alertService: AlertService 
+    private alertService: AlertService
     )  { }
 
   ngOnInit() {
@@ -56,11 +56,10 @@ export class LoginComponent implements OnInit {
 
     this.loading = true;
     this.user = this.authenticationService.login(this.f.username.value, this.f.password.value);
-    if (this.user == undefined) {
+    if (this.user === undefined) {
       this.alertService.error('Login fehlgeschlagen.');
       this.loading = false;
-    }
-    else {
+    } else {
       this.router.navigate(['/home']);
     }
 

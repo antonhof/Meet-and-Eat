@@ -13,10 +13,10 @@ export class FirebaseWorkspaceService {
   workspace$: Observable<Workspace>;
   workspaces: Workspace[];
 
-  constructor(private db: AngularFireDatabase) { 
+  constructor(private db: AngularFireDatabase) {
     this.workspacesRef = db.list('/workspaces');
     this.workspaces$ = this.workspacesRef.snapshotChanges().pipe(
-      map(changes => 
+      map(changes =>
         changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
         )
     );
@@ -35,7 +35,7 @@ export class FirebaseWorkspaceService {
 
   getWorkspaceByName(name: string) {
     return this.workspaces.find(function(workspace) {
-      return name == workspace.name;
+      return name === workspace.name;
     });
   }
 

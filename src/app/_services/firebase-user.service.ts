@@ -15,13 +15,13 @@ export class FirebaseUserService {
   constructor(private db: AngularFireDatabase) {
     this.usersRef = db.list('/users');
     this.users$ = this.usersRef.snapshotChanges().pipe(
-      map(changes => 
+      map(changes =>
         changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
         )
     );
     this.users$.forEach(users => {
       this.users = users;
-    }); 
+    });
    }
 
   getAll() {
@@ -30,7 +30,7 @@ export class FirebaseUserService {
 
 getByUserName(userName: string) {
   return this.users.find(function(user) {
-    return userName == user.username;
+    return userName === user.username;
   });
 }
 
@@ -38,11 +38,6 @@ register(user: User) {
   this.usersRef.push(user);
   return this.users$;
 }
-
-/*update(user_id: number, user: User) {
-  this.db.object('/users/' + user_id).update(user);
-  return this.db.object('/users/' + user_id).snapshotChanges();
-} */
 
 delete(key: string) {
   this.usersRef.remove(key);

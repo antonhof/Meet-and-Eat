@@ -15,16 +15,14 @@ export class FirebaseAuthenticationService {
   login(username: string, password: string) {
 
     this.user = this.userService.getByUserName(username);
-    if (this.user != undefined) {
-      if (this.user.password == password) {
+    if (this.user !== undefined) {
+      if (this.user.password === password) {
         localStorage.setItem('currentUser', JSON.stringify(this.user));
         return this.user;
-      }
-      else {
+      } else {
         /*Passwort ist falsch*/
       }
-    }
-    else {
+    } else {
       /*Benutzer nicht vorhanden*/
     }
     return undefined;
@@ -33,5 +31,5 @@ export class FirebaseAuthenticationService {
   logout() {
     localStorage.removeItem('currentUser');
   }
-  
+
 }

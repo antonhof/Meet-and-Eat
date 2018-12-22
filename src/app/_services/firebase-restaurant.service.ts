@@ -1,3 +1,4 @@
+import { User } from './../_models/user';
 import { Injectable, Input } from '@angular/core';
 import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
 import { Observable, Subject } from 'rxjs';
@@ -57,6 +58,8 @@ export class FirebaseRestaurantService {
       const r: Restaurant = {name: rk.name, score: rk.score};
       this.restaurantRef.update(rk.key, r);
     });
+    this.db.list('/workspaces/' + this.key + '/checkedUser')
+    .push((JSON.parse(localStorage.getItem('currentUser')) as User).username);
    }
 
 }

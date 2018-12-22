@@ -23,10 +23,10 @@ export class HomeComponent implements OnInit {
   submitted = false;
 
   constructor(private userService: FirebaseUserService,
-              private workspaceService: FirebaseWorkspaceService, 
+              private workspaceService: FirebaseWorkspaceService,
               private router: Router,
               private formBuilder: FormBuilder,
-              private alertService: AlertService) { 
+              private alertService: AlertService) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
     this.loadAllWorkspaces();
   }
 
-  get f() {return this.wForm.controls;}
+  get f() { return this.wForm.controls; }
 
   createWorkspace() {
     this.submitted = true;
@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit {
   }
 
   private loadAllWorkspaces() {
-    console.log("workspace werden geladen");
+    console.log('workspace werden geladen');
     this.workspaces$ = this.workspaceService.getAll();
   }
 
