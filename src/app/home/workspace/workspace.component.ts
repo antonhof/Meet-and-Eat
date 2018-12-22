@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Workspace } from '../../_models/workspace';
 import { FirebaseWorkspaceService } from '../../_services/firebase-workspace.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { FirebaseRestaurantService } from '../../_services/firebase-restaurant.service';
 import { Restaurant } from '../../_models/restaurant';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { RestWithKey } from '../../_models/restWithKey';
 
 @Component({
   selector: 'app-workspace',
@@ -17,8 +17,9 @@ export class WorkspaceComponent implements OnInit {
   key: string;
   workspace$;
   restaurants$: Observable<Restaurant[]>;
-  rForm: FormGroup
+  rForm: FormGroup;
   submitted = false;
+  checkedRestaurants: RestWithKey[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -30,7 +31,7 @@ export class WorkspaceComponent implements OnInit {
 
   ngOnInit() {
     this.workspace$ = this.route.paramMap.pipe(
-      switchMap((params: ParamMap) =>   
+      switchMap((params: ParamMap) =>
         this.service.getWorkspace(params.get('key')))
     );
     this.route.params.subscribe(params => {
@@ -39,15 +40,15 @@ export class WorkspaceComponent implements OnInit {
     this.rForm = this.formBuilder.group({
       spaceName: ['', Validators.required]
     });
-    this.restaurantService.initRestaurants(this.key);  
-    this.loadRestaurants()
+    this.restaurantService.initRestaurants(this.key);
+    this.loadRestaurants();
   }
 
-get f() {return this.rForm.controls;}
+get f() { return this.rForm.controls; }
 
   private loadRestaurants() {
     this.restaurants$ = this.restaurantService.getAll();
-    console.log("Restaurants geladen");
+    console.log('Restaurants geladen');
   }
 
   createRestaurant() {
@@ -57,9 +58,17 @@ get f() {return this.rForm.controls;}
     }
     this.restaurantService.create(this.f.spaceName.value);
   }
- 
+
   choseRestaurant(key: string, name: string, score: number, isChecked: boolean) {
-    console.log(isChecked);
-    this.restaurantService.update(key, name, score, isChecked);
+    if (isChecked) {
+      const r: RestWithKey = {key: key, name: name, score: score + 1 };
+      this.checkedRestaurants.push(r);
+    } else {
+      this.checkedRestaurants = this.checkedRestaurants.filter(r => r.key !== key);
+    }
+  }
+
+  saveChosenRestaurants() {
+    this.restaurantService.updateChecked(this.checkedRestaurants);
   }
 }

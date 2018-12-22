@@ -17,4 +17,7 @@
     </div>
   </div>
 </form>
-<button type="button" class="btn btn-primary" [routerLink]="['/home']">Zurück</button>
+<nav>
+  <button type="button" class="btn btn-primary" [routerLink]="['/home']">Zurück</button>
+  <button class="btn btn-primary" (click)="saveChosenRestaurants()">Bestätigen</button>
+</nav>
